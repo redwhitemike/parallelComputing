@@ -1,6 +1,5 @@
 package com.Mika;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,13 +10,17 @@ public class QuickThread {
 
     static int amountOfThreads = 2;
 
-    int[] sortedDataSet;
+    int[] sortedArray;
 
     private static ExecutorService pool;
 
     public QuickThread(int threads) {
         amountOfThreads = threads;
         pool = Executors.newFixedThreadPool(amountOfThreads);
+    }
+
+    public int[] getArray(){
+        return sortedArray;
     }
 
     int partition(int arr[], int low, int high) {
@@ -84,7 +87,7 @@ public class QuickThread {
 
             }
         }
-        sortedDataSet = arr;
+        sortedArray = arr;
     }
 
     void sort(int arr[], int low, int high) {
@@ -126,8 +129,8 @@ public class QuickThread {
 
     public void printDataSet(){
         System.out.print("Dataset ");
-        for (int i = 0; i < sortedDataSet.length; i++){
-            System.out.print(" "+sortedDataSet[i]);
+        for (int i = 0; i < sortedArray.length; i++){
+            System.out.print(" "+ sortedArray[i]);
         }
     }
 }

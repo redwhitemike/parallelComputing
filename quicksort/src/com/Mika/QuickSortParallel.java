@@ -17,6 +17,10 @@ public class QuickSortParallel {
         this.amountOfThreads = threads;
     }
 
+    public int[] getArray(){
+        return sortedArray;
+    }
+
     int partition(int arr[], int low, int high) {
         int pivot = arr[high];
         int i = (low - 1); // index of smaller element

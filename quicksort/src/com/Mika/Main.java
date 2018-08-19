@@ -20,6 +20,10 @@ public class Main {
          * "nameofclass".printDataSet()
          */
 
+        /**
+         * there is a test method implemented
+         */
+
         int[] list = {10, 100, 1000, 10000};
 //        int[] list = {10};
 
@@ -37,6 +41,7 @@ public class Main {
 
             //convert list to array so that it can be used in the serial method
             for (int i = 0; i < dataSetList.size(); i++) {
+                compareDataSet[i] = dataSetList.get(i);
                 dataSet1[i] = dataSetList.get(i);
                 dataSet2[i] = dataSetList.get(i);
                 dataSet3[i] = dataSetList.get(i);
@@ -68,7 +73,6 @@ public class Main {
             int lo7 = 0;
 
             Arrays.sort(compareDataSet);
-
             /**
              * serial code
              */
@@ -80,6 +84,7 @@ public class Main {
             long endTime = System.nanoTime();
             long totalTime = endTime - startTime;
             System.out.println("total time serial " + k + " = " + totalTime);
+//            testDataSet(compareDataSet, dataSet1);
 
             /**
              * threads and locks with 2 threads
@@ -93,6 +98,8 @@ public class Main {
             long endTimeParallel = System.nanoTime();
             long totalTimeParallel = endTimeParallel - startTimeParallel;
             System.out.println("total time parallel(" + threadsFirst + " threads) " + k + " = " + totalTimeParallel);
+//            parallelQuick.printDataSet();
+//            testDataSet(compareDataSet, parallelQuick.getArray());
 
             /**
              * threads and locks with 4 threads
@@ -106,6 +113,8 @@ public class Main {
             long endTimeParallel2 = System.nanoTime();
             long totalTimeParallel2 = endTimeParallel2 - startTimeParallel2;
             System.out.println("total time parallel(" + threadsSecond + " threads) " + k + " = " + totalTimeParallel2);
+//            parallelQuick2.printDataSet();
+//            testDataSet(compareDataSet, parallelQuick2.getArray());
 
             /**
              * threads and locks (AtomicArray) with 2 threads
@@ -120,6 +129,7 @@ public class Main {
             long totalTimeParallelAtomic = endTimeParallelAtomic - startTimeParallelAtomic;
             System.out.println("total time parallel Atomic (" + threadsFirstAtomic + " threads) " + k + " = " + totalTimeParallelAtomic);
 
+
             /**
              * threads and locks (AtomicArray) with 4 threads
              */
@@ -132,6 +142,7 @@ public class Main {
             long endTimeParallelAtomic2 = System.nanoTime();
             long totalTimeParallelAtomic2 = endTimeParallelAtomic2 - startTimeParallelAtomic2;
             System.out.println("total time parallel Atomic (" + threadsSecondAtomic2 + " threads) " + k + " = " + totalTimeParallelAtomic2);
+
 
             /**
              * thread pool with 2 threads
@@ -146,6 +157,7 @@ public class Main {
             long totalTimeThreadPool = endTimeThreadPool - startTimeThreadPool;
             System.out.println("total time thread pool ("+threadsFirstThreadPool+" threads) "+k+" = "+totalTimeThreadPool);
 //            quickThread.printDataSet();
+//            testDataSet(compareDataSet, quickThread.getArray());
 
             /**
              * thread pool with 4 threads
@@ -159,6 +171,8 @@ public class Main {
             long endTimeThreadPool2   = System.nanoTime();
             long totalTimeThreadPool2 = endTimeThreadPool2 - startTimeThreadPool2;
             System.out.println("total time thread pool ("+threadsSecondThreadPool+" threads) "+k+" = "+totalTimeThreadPool2);
+//            quickThread2.printDataSet();
+//            testDataSet(compareDataSet, quickThread2.getArray());
             printSeperationLine();
         }
     }
@@ -191,11 +205,11 @@ public class Main {
         System.out.println("-------------------------------------------------------------");
     }
 
-    public void testDataSet(int[] compare, int[] dataSet, int number) {
-        if (Arrays.equals(compare, dataSet)) {
-            System.out.println("dataset " + number + " checks out");
-        } else {
-            System.out.println("dataset " + number + " isn't working");
+    public void testDataSet(int[] compare, int[] dataSet) {
+        for (int i = 0; i < dataSet.length; i++){
+            if (compare[i] != dataSet[i]) {
+                System.out.print("false");
+            }
         }
     }
 }

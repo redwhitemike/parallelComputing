@@ -21,6 +21,10 @@ public class QuickSortParallelAtomic {
         this.amountOfThreads = threads;
     }
 
+    public AtomicIntegerArray getArray(){
+        return sortedArray;
+    }
+
     int partitionAtomic(AtomicIntegerArray arr, int low, int high) {
         int pivot = arr.get(high);
         int i = (low - 1); // index of smaller element
